@@ -1,6 +1,7 @@
 import csv
 from collections import Counter
 
+
 def read_path_to_file(path_to_file):
     logs = []
     menu = []
@@ -14,7 +15,7 @@ def read_path_to_file(path_to_file):
 
             if line[1] not in menu:
                 menu.append(line[1])
-            
+
             if line[2] not in week:
                 week.append(line[2])
 
@@ -45,7 +46,7 @@ def get_arnaldo_orders_info(logs):
     for log in logs:
         if log['name'] == 'arnaldo':
             arnaldo_stuff.append(log['order_info'][0])
-    
+
     return arnaldo_stuff.count('hamburguer')
 
 
@@ -63,7 +64,7 @@ def get_joao_orders_info(logs_info):
 
             if log['order_info'][1] in week:
                 joao_day = log['order_info'][1]
-    
+
     return (
         {dish for dish in menu if dish != joao_dish},
         {day for day in week if day != joao_day}
@@ -71,16 +72,9 @@ def get_joao_orders_info(logs_info):
 
 
 def analyze_log(path_to_file):
-    '''
-    Qual o prato mais pedido por 'maria'?
-    Quantas vezes 'arnaldo' pediu 'hamburguer'?
-    Quais pratos 'joao' nunca pediu?
-    Quais dias 'joao' nunca foi à lanchonete?
-    '''
-
     if 'csv' not in path_to_file:
         raise FileNotFoundError(f"Extensão inválida: '{path_to_file}'")
-    
+
     try:
         info = []
 
@@ -96,5 +90,3 @@ def analyze_log(path_to_file):
 
     except FileNotFoundError:
         raise FileNotFoundError(f"Arquivo inexistente: '{path_to_file}'")
-
-print(analyze_log('data/orders_1.csv'))
