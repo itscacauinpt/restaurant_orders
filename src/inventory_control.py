@@ -16,10 +16,18 @@ class InventoryControl:
     }
 
     def __init__(self):
-        pass
+        # self.menu = set()
+        # self.orders = []
+        self.inventory = {ingredient: 0 for ingredient in self.MINIMUM_INVENTORY.keys()}
 
     def add_new_order(self, customer, order, day):
-        pass
+        # print(self.INGREDIENTS[order])
+
+        for ingredient in self.INGREDIENTS[order]:
+            if self.inventory[ingredient] < self.MINIMUM_INVENTORY[ingredient]:
+                self.inventory[ingredient] += 1
+            else:
+                return False
 
     def get_quantities_to_buy(self):
-        pass
+        return self.inventory
